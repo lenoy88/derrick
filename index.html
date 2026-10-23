@@ -36,7 +36,14 @@
       78%{transform:translate3d(22vw,95vh,0) rotate(86deg);opacity:.07}
       100%{transform:translate3d(25vw,125vh,0) rotate(105deg);opacity:0}
     }
-    .site{position:relative;z-index:1}
+    .site{display:none;position:relative;z-index:1}
+    .site.show{display:block}
+    .intro-screen{position:fixed;inset:0;z-index:20;display:grid;place-items:center;padding:24px;background:linear-gradient(135deg,#061b13f2,#123c2af5);text-align:center}
+    .intro-card{width:min(92vw,480px);background:#fff;border:3px solid var(--gold);border-radius:24px;padding:18px;box-shadow:0 24px 80px #0008}
+    .intro-logo{display:block;width:100%;max-height:65vh;object-fit:contain;cursor:pointer;border-radius:14px}
+    .intro-card p{margin:12px 4px 2px;color:var(--green);font-weight:800;font-size:1rem}
+    .intro-screen.leaving{animation:introLeave .55s ease forwards;pointer-events:none}
+    @keyframes introLeave{to{opacity:0;visibility:hidden}}
     header{background:linear-gradient(130deg,var(--deep),var(--green));color:white;padding:16px clamp(16px,4vw,54px) 62px;position:relative;overflow:hidden}
     .nav{max-width:1160px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:16px}
     .brand{font-weight:800;letter-spacing:.03em}
@@ -96,6 +103,24 @@
     footer{background:var(--deep);color:#e8efe8;text-align:center;padding:28px 18px;margin-top:18px}
     .footer-phone{color:#d5e7b7;font-weight:800;text-decoration:none}
     .music-frame{position:fixed;width:1px;height:1px;left:-10px;top:-10px;opacity:.001;pointer-events:none}
+    .chat-widget{position:fixed;right:20px;bottom:18px;z-index:15}
+    .chat-launcher{border:0;border-radius:999px;background:var(--green);color:#fff;padding:14px 19px;font:inherit;font-weight:800;box-shadow:0 8px 24px #071d14a6;cursor:pointer}
+    .chat-launcher:hover{background:#20583b}
+    .chat-panel{position:absolute;right:0;bottom:68px;width:min(360px,calc(100vw - 28px));background:#fff;border:1px solid #dce4d5;border-radius:18px;box-shadow:0 18px 55px #071d1440;overflow:hidden}
+    .chat-panel[hidden]{display:none}
+    .chat-panel-head{display:flex;align-items:center;justify-content:space-between;background:var(--green);color:#fff;padding:14px 16px}
+    .chat-panel-head strong{display:block}
+    .chat-panel-head small{color:#d5e7b7}
+    .chat-close{border:0;background:transparent;color:white;font-size:1.7rem;line-height:1;cursor:pointer}
+    .chat-panel-body{padding:16px}
+    .chat-greeting{background:#eef4e8;border-radius:14px 14px 14px 4px;padding:11px 13px;color:#344a37;margin:0 0 14px;font-size:.94rem}
+    .quick-chat-form{display:grid;gap:10px}
+    .quick-chat-form label{font-size:.85rem;font-weight:700;color:var(--green)}
+    .quick-chat-form input,.quick-chat-form textarea{width:100%;padding:10px 11px;border:1px solid #cbd3c5;border-radius:9px;font:inherit;background:#fff}
+    .quick-chat-form textarea{min-height:82px;resize:vertical}
+    .quick-chat-form button{width:100%;border:0;cursor:pointer;font:inherit}
+    .quick-chat-note{font-size:.76rem;color:#68746b;margin:0}
+    @media(max-width:480px){.chat-widget{right:12px;bottom:12px}.chat-launcher{padding:12px 15px}}
     @media(max-width:800px){
       .hero{grid-template-columns:1fr;text-align:center;margin-top:34px}
       .hero p{margin-left:auto;margin-right:auto}
@@ -120,7 +145,16 @@
     <div class="falling-tree three"><svg viewBox="0 0 100 190"><path d="M47 185h9v-77h13l-18-18-18 18h14v77zM51 8 27 55h15L19 84h23L11 112h79L59 84h22L58 55h15z"/></svg></div>
   </div>
 
-  <div class="site">
+  <div class="intro-screen" id="introScreen">
+    <div class="intro-card">
+      <button class="logo-button" id="enterWithLogo" type="button" aria-label="Click the Squirrelly Tree Care logo to enter the website and play music">
+        <img class="intro-logo" src="937.png" alt="Squirrelly Tree Care LLC squirrel and tree logo">
+      </button>
+      <p>Click the logo to enter and play music</p>
+    </div>
+  </div>
+
+  <div class="site" id="websiteContent">
     <header id="top">
       <nav class="nav" aria-label="Main navigation">
         <div class="brand">SQUIRRELLY TREE CARE LLC</div>
@@ -243,6 +277,31 @@
       <a class="footer-phone" href="tel:+17575598416">+1 (757) 559-8416</a><br>
       <small>Reliable • Insured • Over a decade of contract experience</small>
     </footer>
+
+    <div class="chat-widget">
+      <div class="chat-panel" id="quickChatPanel" hidden>
+        <div class="chat-panel-head">
+          <div><strong>Squirrelly Tree Care</strong><small>Text Derrick Williams</small></div>
+          <button class="chat-close" id="closeChat" type="button" aria-label="Close chat">×</button>
+        </div>
+        <div class="chat-panel-body">
+          <p class="chat-greeting">Hi! Tell Derrick what tree care you need.</p>
+          <form class="quick-chat-form" id="quickChatForm">
+            <div>
+              <label for="quickName">Your name</label>
+              <input id="quickName" autocomplete="name" placeholder="Your name" required>
+            </div>
+            <div>
+              <label for="quickMessage">Your message</label>
+              <textarea id="quickMessage" placeholder="How can we help?" required></textarea>
+            </div>
+            <button class="button gold" type="submit">Text Derrick</button>
+            <p class="quick-chat-note">This opens your phone’s text-message app.</p>
+          </form>
+        </div>
+      </div>
+      <button class="chat-launcher" id="chatLauncher" type="button" aria-expanded="false">💬 Chat with Derrick</button>
+    </div>
   </div>
 
   <script>
@@ -253,6 +312,8 @@
     const logoButton = document.getElementById('musicLogo');
     const soundStatus = document.getElementById('soundStatus');
     const soundText = document.getElementById('soundText');
+    const introScreen = document.getElementById('introScreen');
+    const websiteContent = document.getElementById('websiteContent');
 
     function toggleMusic(){
       if(!musicFrame){
@@ -289,16 +350,44 @@
 
     logoButton.addEventListener('click',toggleMusic);
 
-    document.getElementById('messageForm').addEventListener('submit',function(event){
-      event.preventDefault();
+    document.getElementById('enterWithLogo').addEventListener('click',function(){
+      websiteContent.classList.add('show');
+      toggleMusic();
+      introScreen.classList.add('leaving');
+      window.setTimeout(function(){introScreen.remove();},600);
+      window.scrollTo(0,0);
+    });
 
-      const name = document.getElementById('customerName').value.trim();
-      const message = document.getElementById('customerMessage').value.trim();
-
-      if(!name || !message) return;
-
+    function openTextMessage(name,message){
       const body = `Hello Derrick, my name is ${name}. ${message}`;
       window.location.href = `sms:+17575598416?body=${encodeURIComponent(body)}`;
+    }
+
+    document.getElementById('messageForm').addEventListener('submit',function(event){
+      event.preventDefault();
+      const name = document.getElementById('customerName').value.trim();
+      const message = document.getElementById('customerMessage').value.trim();
+      if(name && message) openTextMessage(name,message);
+    });
+
+    const chatPanel = document.getElementById('quickChatPanel');
+    const chatLauncher = document.getElementById('chatLauncher');
+
+    chatLauncher.addEventListener('click',function(){
+      chatPanel.hidden = !chatPanel.hidden;
+      chatLauncher.setAttribute('aria-expanded',String(!chatPanel.hidden));
+    });
+
+    document.getElementById('closeChat').addEventListener('click',function(){
+      chatPanel.hidden = true;
+      chatLauncher.setAttribute('aria-expanded','false');
+    });
+
+    document.getElementById('quickChatForm').addEventListener('submit',function(event){
+      event.preventDefault();
+      const name = document.getElementById('quickName').value.trim();
+      const message = document.getElementById('quickMessage').value.trim();
+      if(name && message) openTextMessage(name,message);
     });
   </script>
 </body>
