@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#123c2a">
+  <meta name="description" content="Squirrelly Tree Care LLC — reliable, insured tree care from Derrick Williams, with over a decade of contract experience.">
+  <title>Squirrelly Tree Care LLC | Tree Care</title>
+  <style>
+    :root{--green:#123c2a;--deep:#09271c;--leaf:#8dbb39;--gold:#d3a33d;--cream:#f7f5ec;--ink:#17231d;--muted:#59675e}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--cream);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.55;overflow-x:hidden}
+    .scene{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+    .leaf{position:absolute;top:-12vh;color:#75a33a;font-size:clamp(18px,3vw,34px);opacity:.27;animation:leafFall linear infinite;filter:drop-shadow(0 2px 2px #273b2518)}
+    .leaf:nth-child(1){left:7%;animation-duration:12s;animation-delay:-6s}
+    .leaf:nth-child(2){left:21%;animation-duration:17s;animation-delay:-12s;font-size:23px}
+    .leaf:nth-child(3){left:38%;animation-duration:14s;animation-delay:-3s;font-size:28px}
+    .leaf:nth-child(4){left:56%;animation-duration:19s;animation-delay:-15s}
+    .leaf:nth-child(5){left:73%;animation-duration:13s;animation-delay:-8s;font-size:26px}
+    .leaf:nth-child(6){left:89%;animation-duration:16s;animation-delay:-4s;font-size:20px}
+    @keyframes leafFall{
+      0%{transform:translate3d(0,-10vh,0) rotate(0)}
+      45%{transform:translate3d(55px,50vh,0) rotate(240deg)}
+      100%{transform:translate3d(-25px,115vh,0) rotate(560deg)}
+    }
+    .falling-tree{position:absolute;width:75px;height:145px;opacity:.11;transform-origin:bottom center;animation:treeFall 20s linear infinite}
+    .falling-tree svg{width:100%;height:100%;fill:#315b35}
+    .falling-tree.one{left:4%;top:-180px;animation-delay:-8s}
+    .falling-tree.two{right:5%;top:-220px;animation-delay:-17s;animation-duration:24s;width:95px;height:175px}
+    .falling-tree.three{left:48%;top:-200px;animation-delay:-3s;animation-duration:27s;width:60px;height:125px}
+    @keyframes treeFall{
+      0%{transform:translate3d(0,-8vh,0) rotate(0deg);opacity:0}
+      9%{opacity:.11}
+      48%{transform:translate3d(10vw,50vh,0) rotate(38deg);opacity:.1}
+      78%{transform:translate3d(22vw,95vh,0) rotate(86deg);opacity:.07}
+      100%{transform:translate3d(25vw,125vh,0) rotate(105deg);opacity:0}
+    }
+    .site{position:relative;z-index:1}
+    header{background:linear-gradient(130deg,var(--deep),var(--green));color:white;padding:16px clamp(16px,4vw,54px) 62px;position:relative;overflow:hidden}
+    .nav{max-width:1160px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{font-weight:800;letter-spacing:.03em}
+    .nav a{color:white;text-decoration:none;font-weight:700}
+    .nav-links{display:flex;gap:22px;align-items:center}
+    .nav .call-pill{background:var(--gold);color:#17231d;border-radius:99px;padding:10px 15px}
+    .hero{max-width:1160px;margin:46px auto 0;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:28px}
+    .hero h1{font-size:clamp(2.2rem,5vw,4.5rem);line-height:1.02;margin:0 0 14px;letter-spacing:-.04em}
+    .hero h1 span{color:#b8d878}
+    .eyebrow{text-transform:uppercase;letter-spacing:.16em;font-size:.8rem;color:#d5e7b7;font-weight:800}
+    .hero p{font-size:1.1rem;max-width:580px;color:#e8efe8}
+    .hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+    .button{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border-radius:10px;padding:12px 18px;font-weight:800}
+    .button.gold{background:var(--gold);color:#17231d}
+    .button.outline{border:1px solid #b8d878;color:white}
+    .logo-card{background:#fff;border-radius:22px;padding:13px;box-shadow:0 18px 60px #061b1380;max-width:430px;justify-self:end;text-align:center}
+    .logo-button{display:block;border:0;background:white;padding:0;cursor:pointer;border-radius:14px;width:100%;position:relative}
+    .logo-button img{display:block;width:100%;height:auto;max-height:400px;object-fit:contain;border-radius:12px}
+    .logo-button:focus-visible{outline:4px solid var(--gold);outline-offset:4px}
+    .logo-hint{display:block;color:#375843;font-size:.84rem;font-weight:700;padding:9px 4px 2px}
+    .sound-status{display:inline-flex;align-items:center;gap:7px;margin-top:8px;color:#48604e;font-size:.82rem}
+    .sound-dot{width:9px;height:9px;border-radius:50%;background:#a5aaa5}
+    .sound-status.playing .sound-dot{background:#49a35f;box-shadow:0 0 0 5px #49a35f25}
+    main{max-width:1160px;padding:0 22px;margin:auto}
+    .trust-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:-27px auto 50px;position:relative}
+    .trust-item{background:white;border:1px solid #e6e2d4;border-radius:14px;padding:18px;text-align:center;box-shadow:0 10px 24px #1b33210d}
+    .trust-item strong{display:block;color:var(--green);font-size:1.1rem}
+    .trust-item span{font-size:.9rem;color:var(--muted)}
+    section{padding:24px 0 48px}
+    .section-heading{text-align:center;margin:0 auto 25px;max-width:700px}
+    .section-heading .eyebrow{color:#557b35}
+    .section-heading h2{font-size:clamp(1.8rem,4vw,2.8rem);line-height:1.1;margin:7px 0;color:var(--green)}
+    .section-heading p{color:var(--muted);margin:8px 0}
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:stretch}
+    .about-card,.chat-card{background:white;border:1px solid #e8e4d8;border-radius:18px;padding:clamp(20px,3vw,30px);box-shadow:0 10px 30px #183a2210}
+    .about-card h3,.chat-card h3{color:var(--green);margin:0 0 8px;font-size:1.4rem}
+    .about-card p{color:#46534a}
+    .checklist{padding:0;list-style:none;display:grid;gap:9px}
+    .checklist li:before{content:'✓';font-weight:900;color:#5b8b31;margin-right:10px}
+    .contact-inline{display:inline-block;margin-top:7px;color:var(--green);font-weight:800}
+    .gallery{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+    .photo-slot{min-width:0;aspect-ratio:1/1;background:linear-gradient(145deg,#e6ecd8,#f9f8ef);border:2px dashed #9aaf81;border-radius:16px;overflow:hidden;position:relative;display:grid;place-items:center;text-align:center;color:#496546}
+    .photo-slot img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+    .photo-placeholder{padding:12px}
+    .photo-placeholder .tree-icon{display:block;font-size:2rem;margin-bottom:6px}
+    .photo-placeholder strong{display:block}
+    .photo-placeholder small{font-size:.78rem;color:#617260}
+    .chat-card{max-width:720px;margin:auto}
+    .chat-card p{color:var(--muted);margin-top:0}
+    .chat-form{display:grid;gap:12px}
+    .chat-form label{font-weight:700;color:var(--green)}
+    .chat-form input,.chat-form textarea{width:100%;padding:12px 13px;border:1px solid #cbd3c5;border-radius:10px;font:inherit;background:#fff}
+    .chat-form textarea{min-height:100px;resize:vertical}
+    .chat-form input:focus,.chat-form textarea:focus{outline:3px solid #9ec76a66;border-color:#699447}
+    .chat-form button{border:0;cursor:pointer;font:inherit}
+    .chat-note{font-size:.83rem;color:#68746b!important;margin:0}
+    footer{background:var(--deep);color:#e8efe8;text-align:center;padding:28px 18px;margin-top:18px}
+    .footer-phone{color:#d5e7b7;font-weight:800;text-decoration:none}
+    .music-frame{position:fixed;width:1px;height:1px;left:-10px;top:-10px;opacity:.001;pointer-events:none}
+    @media(max-width:800px){
+      .hero{grid-template-columns:1fr;text-align:center;margin-top:34px}
+      .hero p{margin-left:auto;margin-right:auto}
+      .hero-cta{justify-content:center}
+      .logo-card{justify-self:center;width:min(100%,370px)}
+      .logo-button img{max-height:330px}
+      .trust-row{grid-template-columns:1fr;margin-top:-25px}
+      .about-grid{grid-template-columns:1fr}
+      .gallery{grid-template-columns:repeat(2,1fr)}
+      .nav-links a:not(.call-pill){display:none}
+    }
+    @media(prefers-reduced-motion:reduce){
+      *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important}
+    }
+  </style>
+</head>
+<body>
+  <div class="scene" aria-hidden="true">
+    <span class="leaf">🍃</span><span class="leaf">🍂</span><span class="leaf">🍃</span><span class="leaf">🍂</span><span class="leaf">🍃</span><span class="leaf">🍂</span>
+    <div class="falling-tree one"><svg viewBox="0 0 100 190"><path d="M47 185h9v-77h13l-18-18-18 18h14v77zM51 8 27 55h15L19 84h23L11 112h79L59 84h22L58 55h15z"/></svg></div>
+    <div class="falling-tree two"><svg viewBox="0 0 100 190"><path d="M47 185h9v-77h13l-18-18-18 18h14v77zM51 8 27 55h15L19 84h23L11 112h79L59 84h22L58 55h15z"/></svg></div>
+    <div class="falling-tree three"><svg viewBox="0 0 100 190"><path d="M47 185h9v-77h13l-18-18-18 18h14v77zM51 8 27 55h15L19 84h23L11 112h79L59 84h22L58 55h15z"/></svg></div>
+  </div>
+
+  <div class="site">
+    <header id="top">
+      <nav class="nav" aria-label="Main navigation">
+        <div class="brand">SQUIRRELLY TREE CARE LLC</div>
+        <div class="nav-links">
+          <a href="#services">About</a>
+          <a href="#gallery">Photos</a>
+          <a href="#chat">Message</a>
+          <a class="call-pill" href="tel:+17575598416">Call Derrick</a>
+        </div>
+      </nav>
+
+      <div class="hero">
+        <div>
+          <div class="eyebrow">Reliable tree care • Insured</div>
+          <h1>Care for your trees.<br><span>Respect for your property.</span></h1>
+          <p>Meet Derrick Williams, Master Tree Care Contractor. Bringing over a decade of contract experience to every job.</p>
+          <div class="hero-cta">
+            <a class="button gold" href="tel:+17575598416">Call +1 (757) 559-8416</a>
+            <a class="button outline" href="#chat">Send a message</a>
+          </div>
+        </div>
+
+        <div class="logo-card">
+          <button class="logo-button" id="musicLogo" type="button" aria-label="Click to start or pause the music">
+            <img src="937.png" alt="Squirrelly Tree Care LLC squirrel and tree logo">
+            <span class="logo-hint">Click the logo to play music</span>
+          </button>
+          <span class="sound-status" id="soundStatus">
+            <span class="sound-dot"></span>
+            <span id="soundText">Music is off</span>
+          </span>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="trust-row" aria-label="Business highlights">
+        <div class="trust-item"><strong>10+ Years</strong><span>Contract tree care experience</span></div>
+        <div class="trust-item"><strong>Reliable &amp; Insured</strong><span>Professional service you can count on</span></div>
+        <div class="trust-item"><strong>Talk with Derrick</strong><span><a class="contact-inline" href="tel:+17575598416">(757) 559-8416</a></span></div>
+      </div>
+
+      <section id="services">
+        <div class="section-heading">
+          <div class="eyebrow">Local tree care</div>
+          <h2>Experience you can feel good about</h2>
+          <p>Derrick Williams leads Squirrelly Tree Care LLC with more than a decade of contract work experience.</p>
+        </div>
+
+        <div class="about-grid">
+          <article class="about-card">
+            <h3>Meet Derrick</h3>
+            <p>Reliable, insured tree care backed by over a decade of hands-on contract experience. Call or send a message to talk about your tree care needs.</p>
+            <ul class="checklist">
+              <li>Over a decade of contract experience</li>
+              <li>Reliable and insured</li>
+              <li>Direct contact with Derrick</li>
+            </ul>
+            <a class="contact-inline" href="tel:+17575598416">Call Derrick: +1 (757) 559-8416</a>
+          </article>
+
+          <article class="about-card">
+            <h3>Get in touch</h3>
+            <p>Call now or use the message box below. On a phone, the message form opens your text-message app with Derrick’s number.</p>
+            <a class="button gold" href="sms:+17575598416">Text Derrick</a>
+          </article>
+        </div>
+      </section>
+
+      <section id="gallery">
+        <div class="section-heading">
+          <div class="eyebrow">Recent work</div>
+          <h2>Tree care photo gallery</h2>
+          <p>Ten spots are ready for your tree and job photos. Add your files beside this HTML file and update the image names in the code.</p>
+        </div>
+
+        <div class="gallery">
+          <div class="photo-slot"><img src="tree1.jpg" alt="Tree care project 1" onload="this.nextElementSibling.hidden=true" onerror="this.hidden=true"><div class="photo-placeholder"><span class="tree-icon">🌳</span><strong>Tree photo 1</strong><small>Add tree1.jpg</small></div></div>
+          <div class="photo-slot"><img src="tree2.jpg" alt="Tree care project 2" onload="this.nextElementSibling.hidden=true" onerror="this.hidden=true"><div class="photo-placeholder"><span class="tree-icon">🌲</span><strong>Tree photo 2</strong><small>Add tree2.jpg</small></div></div>
+          <div class="photo-slot"><img src="tree3.jpg" alt="Tree care project 3" onload="this.nextElementSibling.hidden=true" onerror="this.hidden=true"><div class="photo-placeholder"><span class="tree-icon">🌳</span><strong>Tree photo 3</strong><small>Add tree3.jpg</small></div></div>
+          <div class="photo-slot"><img src="tree4.jpg" alt="Tree care project 4" onload="this.nextElementSibling.hidden=true" onerror="this.hidden=true"><div class="photo-placeholder"><span class="tree-icon">🌲</span><strong>Tree photo 4</strong><small>Add tree4.jpg</small></div></div>
+          <div class="photo-slot"><img src="tree5.jpg" alt="Tree care project 5" onload="this.nextElementSibling.hidden=true" onerror="this.hidden=true"><div class="photo-placeholder"><span class="tree-icon">🌳</span><strong>Tree photo 5</strong><small>Add tree5.jpg</small></div></div>
+          <div class="photo-slot"><img src="tree6.jpg" alt="Tree care project 6" onload="this.nextElementSibling.hidden=true" onerror="this.hidden=true"><div class="photo-placeholder"><span class="tree-icon">🌲</span><strong>Tree photo 6</strong><small>Add tree6.jpg</small></div></div>
+          <div class="photo-slot"><img src="tree7.jpg" alt="Tree care project 7" onload="this.nextElementSibling.hidden=true" onerror="this.hidden=true"><div class="photo-placeholder"><span class="tree-icon">🌳</span><strong>Tree photo 7</strong><small>Add tree7.jpg</small></div></div>
+          <div class="photo-slot"><img src="tree8.jpg" alt="Tree care project 8" onload="this.nextElementSibling.hidden=true" onerror="this.hidden=true"><div class="photo-placeholder"><span class="tree-icon">🌲</span><strong>Tree photo 8</strong><small>Add tree8.jpg</small></div></div>
+          <div class="photo-slot"><img src="tree9.jpg" alt="Tree care project 9" onload="this.nextElementSibling.hidden=true" onerror="this.hidden=true"><div class="photo-placeholder"><span class="tree-icon">🌳</span><strong>Tree photo 9</strong><small>Add tree9.jpg</small></div></div>
+          <div class="photo-slot"><img src="tree10.jpg" alt="Tree care project 10" onload="this.nextElementSibling.hidden=true" onerror="this.hidden=true"><div class="photo-placeholder"><span class="tree-icon">🌲</span><strong>Tree photo 10</strong><small>Add tree10.jpg</small></div></div>
+        </div>
+      </section>
+
+      <section id="chat">
+        <div class="section-heading">
+          <div class="eyebrow">Contact Derrick</div>
+          <h2>Send a quick message</h2>
+          <p>Tell Derrick what you need help with, and he can follow up.</p>
+        </div>
+
+        <div class="chat-card">
+          <h3>Message Derrick Williams</h3>
+          <p>This chat box opens your device’s text-message app so your message can go directly to Derrick.</p>
+          <form class="chat-form" id="messageForm">
+            <div>
+              <label for="customerName">Your name</label>
+              <input id="customerName" name="name" autocomplete="name" placeholder="Enter your name" required>
+            </div>
+            <div>
+              <label for="customerMessage">How can we help?</label>
+              <textarea id="customerMessage" name="message" placeholder="Tell us about the tree or service you need" required></textarea>
+            </div>
+            <button class="button gold" type="submit">Continue to text Derrick</button>
+            <p class="chat-note">Your phone may ask you to confirm before the text message opens. Standard messaging rates may apply.</p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <strong>Squirrelly Tree Care LLC</strong><br>
+      Derrick Williams • Master Tree Care Contractor<br>
+      <a class="footer-phone" href="tel:+17575598416">+1 (757) 559-8416</a><br>
+      <small>Reliable • Insured • Over a decade of contract experience</small>
+    </footer>
+  </div>
+
+  <script>
+    const youtubeId = 'g4dScvHrXC8';
+    let musicFrame = null;
+    let isPlaying = false;
+
+    const logoButton = document.getElementById('musicLogo');
+    const soundStatus = document.getElementById('soundStatus');
+    const soundText = document.getElementById('soundText');
+
+    function toggleMusic(){
+      if(!musicFrame){
+        musicFrame = document.createElement('iframe');
+        musicFrame.className = 'music-frame';
+        musicFrame.title = 'Squirrelly Tree Care background music';
+        musicFrame.allow = 'autoplay; encrypted-media; picture-in-picture';
+        musicFrame.referrerPolicy = 'strict-origin-when-cross-origin';
+        musicFrame.src = `https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1&loop=1&playlist=${youtubeId}&controls=0&playsinline=1&enablejsapi=1&origin=${encodeURIComponent(location.origin)}`;
+        document.body.appendChild(musicFrame);
+        isPlaying = true;
+      }else{
+        musicFrame.contentWindow.postMessage(
+          JSON.stringify({
+            event:'command',
+            func:isPlaying ? 'pauseVideo' : 'playVideo',
+            args:[]
+          }),
+          '*'
+        );
+        isPlaying = !isPlaying;
+      }
+
+      soundStatus.classList.toggle('playing',isPlaying);
+      soundText.textContent = isPlaying
+        ? 'Music is playing — click to pause'
+        : 'Music is paused — click to play';
+
+      logoButton.setAttribute(
+        'aria-label',
+        isPlaying ? 'Click to pause the music' : 'Click to play the music'
+      );
+    }
+
+    logoButton.addEventListener('click',toggleMusic);
+
+    document.getElementById('messageForm').addEventListener('submit',function(event){
+      event.preventDefault();
+
+      const name = document.getElementById('customerName').value.trim();
+      const message = document.getElementById('customerMessage').value.trim();
+
+      if(!name || !message) return;
+
+      const body = `Hello Derrick, my name is ${name}. ${message}`;
+      window.location.href = `sms:+17575598416?body=${encodeURIComponent(body)}`;
+    });
+  </script>
+</body>
+</html>
