@@ -1,9 +1,10 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#123c2a">
+<meta name="theme-color" content="#19472f">
+<meta name="description" content="Squirrelly Tree Care LLC. Contact Derrick Williams for reliable tree care backed by over a decade of contract experience.">
 <title>Squirrelly Tree Care LLC</title>
 
 <style>
@@ -25,12 +26,13 @@ body{
   overflow-x:hidden;
 }
 button,input,textarea{font:inherit}
-button,a,input,textarea{touch-action:manipulation}
 button{cursor:pointer}
 a{color:var(--green)}
 [hidden]{display:none!important}
-
-/* Falling leaves and trees */
+button:focus-visible,a:focus-visible{
+  outline:3px solid var(--gold);
+  outline-offset:4px;
+}
 .scene{
   position:fixed;
   inset:0;
@@ -43,15 +45,13 @@ a{color:var(--green)}
   top:-160px;
   animation:fall linear infinite;
 }
-.leaf{font-size:30px;opacity:.8}
-.falling-tree{font-size:75px;opacity:.25}
+.leaf{font-size:30px;opacity:.75}
+.falling-tree{font-size:75px;opacity:.2}
 @keyframes fall{
-  0%{transform:translateY(-120px) rotate(0deg)}
+  0%{transform:translateY(-160px) rotate(0deg)}
   50%{transform:translate(45px,55vh) rotate(170deg)}
   100%{transform:translate(-30px,125vh) rotate(360deg)}
 }
-
-/* Click to enter */
 .intro{
   position:fixed;
   inset:0;
@@ -62,7 +62,6 @@ a{color:var(--green)}
   background:linear-gradient(135deg,#153d2b,#37794d);
 }
 .intro-button{
-  display:block;
   width:min(400px,100%);
   padding:15px;
   background:white;
@@ -79,12 +78,7 @@ a{color:var(--green)}
   object-fit:contain;
   border-radius:14px;
 }
-.intro-button span{
-  display:block;
-  padding:14px 5px 4px;
-}
-
-/* Main site */
+.intro-button span{display:block;padding:14px 5px 4px}
 .site{position:relative;z-index:1}
 header{
   background:linear-gradient(130deg,#19472ff2,#3d8054eb);
@@ -136,7 +130,11 @@ h1 span{color:#b8d878}
   text-decoration:none;
   text-align:center;
 }
-.button.outline{background:transparent;border:1px solid #b8d878;color:white}
+.button.outline{
+  background:transparent;
+  border:1px solid #b8d878;
+  color:white;
+}
 .logo-card{
   background:white;
   padding:15px;
@@ -201,38 +199,46 @@ section{padding:35px 0}
 .card h3{color:var(--green);margin-top:0}
 .checklist{list-style:none;padding:0}
 .checklist li{margin:10px 0}
-.checklist li::before{content:"✓ ";color:var(--green);font-weight:bold}
+.checklist li::before{
+  content:"✓ ";
+  color:var(--green);
+  font-weight:bold;
+}
 
-/* Photos */
+/* Photos are visible immediately. */
 .gallery{
   display:grid;
-  grid-template-columns:repeat(5,minmax(0,1fr));
-  gap:14px;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:20px;
 }
-.photo{
-  position:relative;
-  aspect-ratio:1;
-  overflow:hidden;
-  background:#e8efdf;
-  border:1px solid #b7c9a6;
-  border-radius:15px;
-}
-.photo img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-}
-.photo-placeholder{
-  position:absolute;
-  inset:0;
-  display:grid;
-  place-content:center;
-  text-align:center;
-  color:#496546;
+.photo-card{
+  margin:0;
   padding:12px;
+  background:white;
+  border:1px solid #dce4d5;
+  border-radius:18px;
+  overflow:hidden;
 }
-.photo-placeholder span{font-size:36px}
+.photo-card img{
+  display:block;
+  width:100%;
+  height:360px;
+  object-fit:contain;
+  background:#e8efdf;
+  border-radius:12px;
+}
+.photo-card figcaption{
+  padding:10px 4px 2px;
+  color:var(--green);
+  font-weight:bold;
+}
+.photo-error{
+  padding:45px 15px;
+  text-align:center;
+  background:#e8efdf;
+  border-radius:12px;
+  color:var(--green);
+}
 
 /* Videos */
 .video-gallery{
@@ -255,16 +261,13 @@ section{padding:35px 0}
   border-radius:12px;
 }
 .video-card h3{color:var(--green);margin:12px 0 3px}
-.video-empty{
-  display:none;
-  padding:45px 15px;
+.video-error{
+  padding:40px 15px;
   border-radius:12px;
   text-align:center;
   background:#e8efdf;
   color:var(--green);
 }
-.video-card.missing video{display:none}
-.video-card.missing .video-empty{display:block}
 
 /* Contact */
 .contact-card{max-width:720px;margin:auto}
@@ -310,10 +313,11 @@ footer a{color:#d5e7b7}
   right:0;
   bottom:65px;
   width:min(350px,calc(100vw - 32px));
+  max-height:75vh;
+  overflow:auto;
   background:white;
   border:1px solid #dce4d5;
   border-radius:18px;
-  overflow:hidden;
   box-shadow:0 15px 50px #0004;
 }
 .chat-head{
@@ -348,12 +352,12 @@ footer a{color:#d5e7b7}
   .logo-card{justify-self:center}
   .highlights{grid-template-columns:1fr}
   .about-grid{grid-template-columns:1fr}
-  .gallery{grid-template-columns:repeat(2,minmax(0,1fr))}
   nav{flex-direction:column;text-align:center}
   .nav-links{justify-content:center}
 }
 @media(max-width:600px){
-  .video-gallery{grid-template-columns:1fr}
+  .gallery,.video-gallery{grid-template-columns:1fr}
+  .photo-card img{height:320px}
 }
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -363,17 +367,16 @@ footer a{color:#d5e7b7}
 </head>
 
 <body>
-
 <div class="scene" id="scene" aria-hidden="true"></div>
 
-<div class="intro" id="intro">
+<div class="intro" id="intro" hidden>
   <button class="intro-button" id="enterButton" type="button">
     <img src="937.png" alt="Squirrelly Tree Care LLC logo">
     <span>Tap the logo to enter and play music</span>
   </button>
 </div>
 
-<div class="site" id="site" hidden>
+<div class="site" id="site">
   <header>
     <nav aria-label="Main navigation">
       <div class="brand">SQUIRRELLY TREE CARE LLC</div>
@@ -467,15 +470,42 @@ footer a{color:#d5e7b7}
       </div>
     </section>
 
+    <!-- Keep these pictures beside index.html in GitHub. -->
     <section id="photos">
       <div class="heading">
         <div class="eyebrow">Recent work</div>
         <h2>Tree care photo gallery</h2>
         <p>A look at our tree care projects.</p>
       </div>
-      <div class="gallery" id="photoGallery"></div>
+
+      <div class="gallery">
+        <figure class="photo-card">
+          <img src="./tree1.jpg" alt="Squirrelly Tree Care project 1">
+          <p class="photo-error" hidden>Photo unavailable.</p>
+          <figcaption>Tree care project 1</figcaption>
+        </figure>
+
+        <figure class="photo-card">
+          <img src="./tree2.jpg" alt="Squirrelly Tree Care project 2">
+          <p class="photo-error" hidden>Photo unavailable.</p>
+          <figcaption>Tree care project 2</figcaption>
+        </figure>
+
+        <figure class="photo-card">
+          <img src="./tree3.jpg" alt="Squirrelly Tree Care project 3">
+          <p class="photo-error" hidden>Photo unavailable.</p>
+          <figcaption>Tree care project 3</figcaption>
+        </figure>
+
+        <figure class="photo-card">
+          <img src="./tree4.jpg" alt="Squirrelly Tree Care project 4">
+          <p class="photo-error" hidden>Photo unavailable.</p>
+          <figcaption>Tree care project 4</figcaption>
+        </figure>
+      </div>
     </section>
 
+    <!-- Keep these videos beside index.html in GitHub. -->
     <section id="videos">
       <div class="heading">
         <div class="eyebrow">See us at work</div>
@@ -483,63 +513,40 @@ footer a{color:#d5e7b7}
         <p>Watch Squirrelly Tree Care in action.</p>
       </div>
 
-      <!--
-        Upload these files beside index.html in GitHub:
-        video1.mp4
-        video2.mp4
-        video3.mp4
-        video4.mp4
-
-        Use MP4 videos encoded with H.264 video and AAC audio
-        for broad browser compatibility.
-      -->
-
       <div class="video-gallery">
         <article class="video-card">
-          <video
-            controls
-            playsinline
-            preload="metadata"
-            src="video1.mp4"
-            aria-label="Tree care video 1">
+          <video controls playsinline preload="metadata"
+            src="./video1.mp4" aria-label="Tree care video 1">
+            Your browser does not support video playback.
           </video>
-          <div class="video-empty">Video coming soon</div>
+          <p class="video-error" hidden>Video unavailable.</p>
           <h3>Tree care video 1</h3>
         </article>
 
         <article class="video-card">
-          <video
-            controls
-            playsinline
-            preload="metadata"
-            src="video2.mp4"
-            aria-label="Tree care video 2">
+          <video controls playsinline preload="metadata"
+            src="./video2.mp4" aria-label="Tree care video 2">
+            Your browser does not support video playback.
           </video>
-          <div class="video-empty">Video coming soon</div>
+          <p class="video-error" hidden>Video unavailable.</p>
           <h3>Tree care video 2</h3>
         </article>
 
         <article class="video-card">
-          <video
-            controls
-            playsinline
-            preload="metadata"
-            src="video3.mp4"
-            aria-label="Tree care video 3">
+          <video controls playsinline preload="metadata"
+            src="./video3.mp4" aria-label="Tree care video 3">
+            Your browser does not support video playback.
           </video>
-          <div class="video-empty">Video coming soon</div>
+          <p class="video-error" hidden>Video unavailable.</p>
           <h3>Tree care video 3</h3>
         </article>
 
         <article class="video-card">
-          <video
-            controls
-            playsinline
-            preload="metadata"
-            src="video4.mp4"
-            aria-label="Tree care video 4">
+          <video controls playsinline preload="metadata"
+            src="./video4.mp4" aria-label="Tree care video 4">
+            Your browser does not support video playback.
           </video>
-          <div class="video-empty">Video coming soon</div>
+          <p class="video-error" hidden>Video unavailable.</p>
           <h3>Tree care video 4</h3>
         </article>
       </div>
@@ -559,23 +566,23 @@ footer a{color:#d5e7b7}
         <form id="contactForm">
           <label for="customerName">
             Your name
-            <input
-              id="customerName"
-              autocomplete="name"
-              placeholder="Enter your name"
-              required>
+            <input id="customerName" autocomplete="name"
+              placeholder="Enter your name" required>
           </label>
 
           <label for="customerMessage">
             How can we help?
-            <textarea
-              id="customerMessage"
+            <textarea id="customerMessage"
               placeholder="Tell us about your tree care needs"
               required></textarea>
           </label>
 
-          <button class="button" type="submit">Continue to text Derrick</button>
-          <p class="note">Review and send your message in your text-message app.</p>
+          <button class="button" type="submit">
+            Continue to text Derrick
+          </button>
+          <p class="note">
+            Review and send your message in your text-message app.
+          </p>
         </form>
       </div>
     </section>
@@ -601,18 +608,13 @@ footer a{color:#d5e7b7}
         <form id="quickChatForm">
           <label for="quickName">
             Your name
-            <input
-              id="quickName"
-              autocomplete="name"
-              placeholder="Your name"
-              required>
+            <input id="quickName" autocomplete="name"
+              placeholder="Your name" required>
           </label>
 
           <label for="quickMessage">
             Your message
-            <textarea
-              id="quickMessage"
-              placeholder="How can we help?"
+            <textarea id="quickMessage" placeholder="How can we help?"
               required></textarea>
           </label>
 
@@ -622,12 +624,8 @@ footer a{color:#d5e7b7}
       </div>
     </div>
 
-    <button
-      class="chat-launcher"
-      id="chatLauncher"
-      type="button"
-      aria-controls="chatPanel"
-      aria-expanded="false">
+    <button class="chat-launcher" id="chatLauncher"
+      type="button" aria-controls="chatPanel" aria-expanded="false">
       💬 Chat with Derrick
     </button>
   </div>
@@ -636,20 +634,39 @@ footer a{color:#d5e7b7}
 <script>
 "use strict";
 
+/* Photos are ordinary visible HTML images, without lazy loading. */
+document.querySelectorAll(".photo-card img").forEach(function(image){
+  function showError(){
+    image.hidden = true;
+    image.nextElementSibling.hidden = false;
+  }
+
+  image.addEventListener("error", showError);
+
+  image.addEventListener("load", function(){
+    image.hidden = false;
+    image.nextElementSibling.hidden = true;
+  });
+
+  if(image.complete && image.naturalWidth === 0){
+    showError();
+  }
+});
+
 /* Falling leaves and trees */
 const scene = document.getElementById("scene");
 
-for (let i = 0; i < 14; i++) {
+for(let i = 0; i < 14; i++){
   const leaf = document.createElement("span");
   leaf.className = "leaf";
   leaf.textContent = ["🍃", "🍂", "🍁"][i % 3];
   leaf.style.left = (i * 7.4) + "%";
-  leaf.style.animationDuration = (12 + (i % 7)) + "s";
+  leaf.style.animationDuration = (12 + i % 7) + "s";
   leaf.style.animationDelay = (-i * 2.3) + "s";
   scene.appendChild(leaf);
 }
 
-for (let i = 0; i < 3; i++) {
+for(let i = 0; i < 3; i++){
   const tree = document.createElement("span");
   tree.className = "falling-tree";
   tree.textContent = "🌲";
@@ -657,44 +674,6 @@ for (let i = 0; i < 3; i++) {
   tree.style.animationDuration = (24 + i * 4) + "s";
   tree.style.animationDelay = (-i * 9) + "s";
   scene.appendChild(tree);
-}
-
-/* Photo gallery */
-const photoGallery = document.getElementById("photoGallery");
-
-for (let i = 1; i <= 10; i++) {
-  const slot = document.createElement("div");
-  slot.className = "photo";
-
-  const placeholder = document.createElement("div");
-  placeholder.className = "photo-placeholder";
-
-  const icon = document.createElement("span");
-  icon.textContent = "🌳";
-
-  const caption = document.createElement("strong");
-  caption.textContent = "Tree photo " + i;
-
-  placeholder.append(icon, caption);
-
-  const image = document.createElement("img");
-  image.alt = "Tree care project " + i;
-  image.loading = "lazy";
-  image.hidden = true;
-
-  image.addEventListener("load", function () {
-    image.hidden = false;
-    placeholder.hidden = true;
-  });
-
-  image.addEventListener("error", function () {
-    image.hidden = true;
-    placeholder.hidden = false;
-  });
-
-  slot.append(placeholder, image);
-  photoGallery.appendChild(slot);
-  image.src = "tree" + i + ".jpg";
 }
 
 /* Music */
@@ -705,7 +684,7 @@ const musicStatus = document.getElementById("musicStatus");
 let musicFrame = null;
 let musicRequested = false;
 
-function updateMusicStatus() {
+function updateMusicStatus(){
   musicStatus.textContent = musicRequested
     ? "Music requested — tap logo to pause"
     : "Music is paused — tap logo to play";
@@ -716,21 +695,23 @@ function updateMusicStatus() {
   );
 }
 
-function sendMusicCommand(command) {
-  if (!musicFrame || !musicFrame.contentWindow) return;
+function sendMusicCommand(command){
+  if(!musicFrame || !musicFrame.contentWindow) return;
 
   musicFrame.contentWindow.postMessage(
     JSON.stringify({
-      event: "command",
-      func: command,
-      args: []
+      event:"command",
+      func:command,
+      args:[]
     }),
     "https://www.youtube-nocookie.com"
   );
 }
 
-function startMusic() {
-  if (!musicFrame) {
+function startMusic(){
+  musicRequested = true;
+
+  if(!musicFrame){
     musicFrame = document.createElement("iframe");
     musicFrame.className = "music-frame";
     musicFrame.title = "Squirrelly Tree Care background music";
@@ -738,15 +719,15 @@ function startMusic() {
     musicFrame.referrerPolicy = "strict-origin-when-cross-origin";
 
     const params = new URLSearchParams({
-      autoplay: "1",
-      loop: "1",
-      playlist: youtubeId,
-      controls: "0",
-      playsinline: "1",
-      enablejsapi: "1"
+      autoplay:"1",
+      loop:"1",
+      playlist:youtubeId,
+      controls:"0",
+      playsinline:"1",
+      enablejsapi:"1"
     });
 
-    if (location.protocol === "https:" || location.protocol === "http:") {
+    if(location.protocol === "https:" || location.protocol === "http:"){
       params.set("origin", location.origin);
     }
 
@@ -754,124 +735,135 @@ function startMusic() {
       "https://www.youtube-nocookie.com/embed/" +
       youtubeId + "?" + params.toString();
 
-    musicFrame.addEventListener("load", function () {
-      if (!musicRequested) sendMusicCommand("pauseVideo");
+    musicFrame.addEventListener("load", function(){
+      if(!musicRequested) sendMusicCommand("pauseVideo");
     });
 
     document.body.appendChild(musicFrame);
-  } else {
+  }else{
     sendMusicCommand("playVideo");
   }
 
-  musicRequested = true;
   updateMusicStatus();
 }
 
-function pauseMusic() {
+function pauseMusic(){
   musicRequested = false;
   sendMusicCommand("pauseVideo");
   updateMusicStatus();
 }
 
-musicButton.addEventListener("click", function () {
-  if (musicRequested) {
+musicButton.addEventListener("click", function(){
+  if(musicRequested){
     pauseMusic();
-  } else {
-    document.querySelectorAll(".video-card video").forEach(function (video) {
+  }else{
+    document.querySelectorAll(".video-card video").forEach(function(video){
       video.pause();
     });
     startMusic();
   }
 });
 
-/* Enter website */
-document.getElementById("enterButton").addEventListener("click", function () {
-  document.getElementById("site").hidden = false;
-  document.getElementById("intro").hidden = true;
+/* Click logo to enter */
+const intro = document.getElementById("intro");
+const site = document.getElementById("site");
+
+document.getElementById("enterButton").addEventListener("click", function(){
+  site.hidden = false;
+  intro.hidden = true;
   startMusic();
   window.scrollTo(0, 0);
 });
 
-/* Video playback */
-document.querySelectorAll(".video-card video").forEach(function (video) {
-  function showVideoUnavailable() {
-    video.closest(".video-card").classList.add("missing");
+site.hidden = true;
+intro.hidden = false;
+
+/* Videos */
+document.querySelectorAll(".video-card video").forEach(function(video){
+  const errorMessage = video.nextElementSibling;
+
+  function showError(){
+    video.hidden = true;
+    errorMessage.hidden = false;
   }
 
-  video.addEventListener("error", showVideoUnavailable);
+  video.addEventListener("error", showError);
 
-  video.addEventListener("loadedmetadata", function () {
-    video.closest(".video-card").classList.remove("missing");
+  video.addEventListener("loadedmetadata", function(){
+    video.hidden = false;
+    errorMessage.hidden = true;
   });
 
-  video.addEventListener("play", function () {
-    document.querySelectorAll(".video-card video").forEach(function (other) {
-      if (other !== video) other.pause();
+  video.addEventListener("play", function(){
+    document.querySelectorAll(".video-card video").forEach(function(other){
+      if(other !== video) other.pause();
     });
 
-    if (musicRequested) pauseMusic();
+    if(musicRequested) pauseMusic();
   });
 
-  if (video.error) showVideoUnavailable();
+  if(video.error) showError();
 });
 
 /* Text-message forms */
-function openTextMessage(name, message) {
+function openTextMessage(name, message){
   const text = "Hello Derrick, my name is " + name + ". " + message;
-  const isAppleMobile = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+  const isAppleMobile =
+    /iPhone|iPad|iPod/i.test(navigator.userAgent) ||
+    (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+
   const separator = isAppleMobile ? "&" : "?";
 
   window.location.href =
     "sms:+17575598416" + separator + "body=" + encodeURIComponent(text);
 }
 
-document.getElementById("contactForm").addEventListener("submit", function (event) {
+document.getElementById("contactForm").addEventListener("submit", function(event){
   event.preventDefault();
 
   const name = document.getElementById("customerName").value.trim();
   const message = document.getElementById("customerMessage").value.trim();
 
-  if (name && message) openTextMessage(name, message);
+  if(name && message) openTextMessage(name, message);
 });
 
-document.getElementById("quickChatForm").addEventListener("submit", function (event) {
+document.getElementById("quickChatForm").addEventListener("submit", function(event){
   event.preventDefault();
 
   const name = document.getElementById("quickName").value.trim();
   const message = document.getElementById("quickMessage").value.trim();
 
-  if (name && message) openTextMessage(name, message);
+  if(name && message) openTextMessage(name, message);
 });
 
 /* Floating chat */
 const chatPanel = document.getElementById("chatPanel");
 const chatLauncher = document.getElementById("chatLauncher");
 
-function setChatOpen(open) {
+function setChatOpen(open){
   chatPanel.hidden = !open;
   chatLauncher.setAttribute("aria-expanded", String(open));
 
-  if (open) {
+  if(open){
     document.getElementById("quickName").focus();
-  } else {
+  }else{
     chatLauncher.focus();
   }
 }
 
-chatLauncher.addEventListener("click", function () {
+chatLauncher.addEventListener("click", function(){
   setChatOpen(chatPanel.hidden);
 });
 
-document.getElementById("closeChat").addEventListener("click", function () {
+document.getElementById("closeChat").addEventListener("click", function(){
   setChatOpen(false);
 });
 
-document.addEventListener("keydown", function (event) {
-  if (event.key === "Escape" && !chatPanel.hidden) {
+document.addEventListener("keydown", function(event){
+  if(event.key === "Escape" && !chatPanel.hidden){
     setChatOpen(false);
   }
 });
 </script>
-
 </body>
 </html>
