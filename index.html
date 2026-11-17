@@ -1,319 +1,877 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#123c2a">
-  <meta name="description" content="Squirrelly Tree Care LLC — reliable, insured tree care from Derrick Williams, with over a decade of contract experience.">
-  <title>Squirrelly Tree Care LLC | Tree Care</title>
-  <style>
-    :root{--green:#2f7046;--deep:#19472f;--leaf:#a5cf60;--gold:#d3a33d;--cream:#f7f5ec;--ink:#17231d;--muted:#59675e}
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{margin:0;background:var(--cream);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.55;overflow-x:hidden}
-    .scene{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
-    .leaf{position:absolute;top:-12vh;width:clamp(28px,3.2vw,42px);height:auto;opacity:.9;animation:leafFall linear infinite;filter:drop-shadow(0 3px 4px #152c1740)}
-    .leaf svg{display:block;width:100%;height:auto;overflow:visible}
-    .leaf path:first-child{fill:currentColor}
-    .leaf path:last-child{fill:none;stroke:#fff9d7;stroke-width:1.5;stroke-linecap:round;opacity:.75}
-    .leaf:nth-child(1){left:7%;animation-duration:12s;animation-delay:-6s;color:#5d963c}
-    .leaf:nth-child(2){left:21%;animation-duration:17s;animation-delay:-12s;width:34px;color:#d5a33e}
-    .leaf:nth-child(3){left:38%;animation-duration:14s;animation-delay:-3s;width:38px;color:#8eae42}
-    .leaf:nth-child(4){left:56%;animation-duration:19s;animation-delay:-15s;color:#c8753c}
-    .leaf:nth-child(5){left:73%;animation-duration:13s;animation-delay:-8s;width:36px;color:#a4b94b}
-    .leaf:nth-child(6){left:89%;animation-duration:16s;animation-delay:-4s;width:31px;color:#b6533c}
-    @keyframes leafFall{0%{transform:translate3d(0,-10vh,0) rotate(0)}45%{transform:translate3d(55px,50vh,0) rotate(240deg)}100%{transform:translate3d(-25px,115vh,0) rotate(560deg)}}
-    .falling-tree{position:absolute;width:75px;height:145px;opacity:.58;transform-origin:bottom center;animation:treeFall 20s linear infinite;filter:drop-shadow(0 4px 5px #10281945)}
-    .falling-tree svg{width:100%;height:100%;fill:#1e5835}
-    .falling-tree.one{left:4%;top:-180px;animation-delay:-8s}
-    .falling-tree.two{right:5%;top:-220px;animation-delay:-17s;animation-duration:24s;width:95px;height:175px}
-    .falling-tree.three{left:48%;top:-200px;animation-delay:-3s;animation-duration:27s;width:60px;height:125px}
-    @keyframes treeFall{0%{transform:translate3d(0,-8vh,0) rotate(0deg);opacity:0}9%{opacity:.58}48%{transform:translate3d(10vw,50vh,0) rotate(38deg);opacity:.48}78%{transform:translate3d(22vw,95vh,0) rotate(86deg);opacity:.32}100%{transform:translate3d(25vw,125vh,0) rotate(105deg);opacity:0}}
-    .site{display:none;position:relative;z-index:1}
-    .site.show{display:block}
-    .intro-screen{position:fixed;inset:0;z-index:20;display:grid;place-items:center;padding:24px;background:linear-gradient(135deg,#153d2bed,#2f7046eb);text-align:center}
-    .intro-card{width:min(calc(100vw - 32px),400px);max-width:100%;background:#fff;border:3px solid var(--gold);border-radius:24px;padding:clamp(10px,3vw,16px);box-shadow:0 24px 80px #0008;margin-inline:auto;overflow:hidden}
-    .intro-entry{display:grid;justify-items:center;gap:10px;width:100%;padding:0;border:0;background:transparent;color:var(--green);font:inherit;font-weight:800;text-align:center;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none}
-    .intro-logo{display:block;width:100%;height:auto;max-height:54vh;object-fit:contain;border-radius:14px}
-    .intro-prompt{display:block;margin:0 2px 2px;font-size:clamp(.9rem,4vw,1rem);line-height:1.3}
-    .intro-screen.leaving{animation:introLeave .55s ease forwards;pointer-events:none}
-    @keyframes introLeave{to{opacity:0;visibility:hidden}}
-    header{background:linear-gradient(130deg,#19472fe8,#3d8054df);color:white;padding:16px clamp(16px,4vw,54px) 62px;position:relative;overflow:hidden}
-    .nav{max-width:1160px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:16px}
-    .brand{font-weight:800;letter-spacing:.03em}
-    .nav a{color:white;text-decoration:none;font-weight:700}
-    .nav-links{display:flex;gap:22px;align-items:center}
-    .nav .call-pill{background:var(--gold);color:#17231d;border-radius:99px;padding:10px 15px}
-    .hero{max-width:1160px;margin:46px auto 0;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:28px}
-    .hero h1{font-size:clamp(2.2rem,5vw,4.5rem);line-height:1.02;margin:0 0 14px;letter-spacing:-.04em}
-    .hero h1 span{color:#b8d878}
-    .eyebrow{text-transform:uppercase;letter-spacing:.16em;font-size:.8rem;color:#d5e7b7;font-weight:800}
-    .hero p{font-size:1.1rem;max-width:580px;color:#e8efe8}
-    .hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
-    .button{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border-radius:10px;padding:12px 18px;font-weight:800}
-    .button.gold{background:var(--gold);color:#17231d}
-    .button.outline{border:1px solid #b8d878;color:white}
-    .logo-card{background:#fff;border-radius:22px;padding:13px;box-shadow:0 18px 60px #061b1380;max-width:430px;justify-self:end;text-align:center}
-    .logo-button{display:block;border:0;background:white;padding:0;cursor:pointer;border-radius:14px;width:100%;position:relative}
-    .logo-button img{display:block;width:100%;height:auto;max-height:400px;object-fit:contain;border-radius:12px}
-    .logo-button:focus-visible{outline:4px solid var(--gold);outline-offset:4px}
-    .logo-hint{display:block;color:#375843;font-size:.84rem;font-weight:700;padding:9px 4px 2px}
-    .sound-status{display:inline-flex;align-items:center;gap:7px;margin-top:8px;color:#48604e;font-size:.82rem}
-    .sound-dot{width:9px;height:9px;border-radius:50%;background:#a5aaa5}
-    .sound-status.playing .sound-dot{background:#49a35f;box-shadow:0 0 0 5px #49a35f25}
-    main{max-width:1160px;padding:0 22px;margin:auto}
-    .trust-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:-27px auto 50px;position:relative}
-    .trust-item{background:white;border:1px solid #e6e2d4;border-radius:14px;padding:18px;text-align:center;box-shadow:0 10px 24px #1b33210d}
-    .trust-item strong{display:block;color:var(--green);font-size:1.1rem}
-    .trust-item span{font-size:.9rem;color:var(--muted)}
-    section{padding:24px 0 48px}
-    .section-heading{text-align:center;margin:0 auto 25px;max-width:700px}
-    .section-heading .eyebrow{color:#557b35}
-    .section-heading h2{font-size:clamp(1.8rem,4vw,2.8rem);line-height:1.1;margin:7px 0;color:var(--green)}
-    .section-heading p{color:var(--muted);margin:8px 0}
-    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:stretch}
-    .about-card,.chat-card{background:white;border:1px solid #e8e4d8;border-radius:18px;padding:clamp(20px,3vw,30px);box-shadow:0 10px 30px #183a2210}
-    .about-card h3,.chat-card h3{color:var(--green);margin:0 0 8px;font-size:1.4rem}
-    .about-card p{color:#46534a}
-    .checklist{padding:0;list-style:none;display:grid;gap:9px}
-    .checklist li:before{content:'✓';font-weight:900;color:#5b8b31;margin-right:10px}
-    .contact-inline{display:inline-block;margin-top:7px;color:var(--green);font-weight:800}
-    .gallery{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
-    .photo-slot{min-width:0;aspect-ratio:1/1;background:linear-gradient(145deg,#e6ecd8,#f9f8ef);border:2px dashed #9aaf81;border-radius:16px;overflow:hidden;position:relative;display:grid;place-items:center;text-align:center;color:#496546}
-    .photo-slot img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
-    .photo-placeholder{padding:12px}
-    .photo-placeholder .tree-icon{display:block;font-size:2rem;margin-bottom:6px}
-    .photo-placeholder strong{display:block}
-    .photo-placeholder small{font-size:.78rem;color:#617260}
-    .chat-card{max-width:720px;margin:auto}
-    .chat-card p{color:var(--muted);margin-top:0}
-    .chat-form{display:grid;gap:12px}
-    .chat-form label{font-weight:700;color:var(--green)}
-    .chat-form input,.chat-form textarea{width:100%;padding:12px 13px;border:1px solid #cbd3c5;border-radius:10px;font:inherit;background:#fff}
-    .chat-form textarea{min-height:100px;resize:vertical}
-    .chat-form input:focus,.chat-form textarea:focus{outline:3px solid #9ec76a66;border-color:#699447}
-    .chat-form button{border:0;cursor:pointer;font:inherit}
-    .chat-note{font-size:.83rem;color:#68746b!important;margin:0}
-    footer{background:var(--deep);color:#e8efe8;text-align:center;padding:28px 18px;margin-top:18px}
-    .footer-phone{color:#d5e7b7;font-weight:800;text-decoration:none}
-    .music-frame{position:fixed;width:1px;height:1px;left:-10px;top:-10px;opacity:.001;pointer-events:none}
-    .chat-widget{position:fixed;right:20px;bottom:18px;z-index:15}
-    .chat-launcher{border:0;border-radius:999px;background:var(--green);color:#fff;padding:14px 19px;font:inherit;font-weight:800;box-shadow:0 8px 24px #071d14a6;cursor:pointer}
-    .chat-launcher:hover{background:#20583b}
-    .chat-panel{position:absolute;right:0;bottom:68px;width:min(360px,calc(100vw - 28px));background:#fff;border:1px solid #dce4d5;border-radius:18px;box-shadow:0 18px 55px #071d1440;overflow:hidden}
-    .chat-panel[hidden]{display:none}
-    .chat-panel-head{display:flex;align-items:center;justify-content:space-between;background:var(--green);color:#fff;padding:14px 16px}
-    .chat-panel-head strong{display:block}
-    .chat-panel-head small{color:#d5e7b7}
-    .chat-close{border:0;background:transparent;color:white;font-size:1.7rem;line-height:1;cursor:pointer}
-    .chat-panel-body{padding:16px}
-    .chat-greeting{background:#eef4e8;border-radius:14px 14px 14px 4px;padding:11px 13px;color:#344a37;margin:0 0 14px;font-size:.94rem}
-    .quick-chat-form{display:grid;gap:10px}
-    .quick-chat-form label{font-size:.85rem;font-weight:700;color:var(--green)}
-    .quick-chat-form input,.quick-chat-form textarea{width:100%;padding:10px 11px;border:1px solid #cbd3c5;border-radius:9px;font:inherit;background:#fff}
-    .quick-chat-form textarea{min-height:82px;resize:vertical}
-    .quick-chat-form button{width:100%;border:0;cursor:pointer;font:inherit}
-    .quick-chat-note{font-size:.76rem;color:#68746b;margin:0}
-    @media(max-width:480px){.chat-widget{right:12px;bottom:12px}.chat-launcher{padding:12px 15px}}
-    @media(max-width:800px){
-      .hero{grid-template-columns:1fr;text-align:center;margin-top:34px}
-      .hero p{margin-left:auto;margin-right:auto}
-      .hero-cta{justify-content:center}
-      .logo-card{justify-self:center;width:min(100%,370px)}
-      .logo-button img{max-height:330px}
-      .trust-row{grid-template-columns:1fr;margin-top:-25px}
-      .about-grid{grid-template-columns:1fr}
-      .gallery{grid-template-columns:repeat(2,1fr)}
-      .nav-links a:not(.call-pill){display:none}
-    }
-    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important}}
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#123c2a">
+<title>Squirrelly Tree Care LLC</title>
+
+<style>
+:root{
+  --green:#2f7046;
+  --deep:#19472f;
+  --gold:#d3a33d;
+  --cream:#f7f5ec;
+  --ink:#17231d;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--cream);
+  color:var(--ink);
+  font-family:Arial,Helvetica,sans-serif;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+button,input,textarea{font:inherit}
+button,a,input,textarea{touch-action:manipulation}
+button{cursor:pointer}
+a{color:var(--green)}
+[hidden]{display:none!important}
+
+/* Falling leaves and trees */
+.scene{
+  position:fixed;
+  inset:0;
+  overflow:hidden;
+  pointer-events:none;
+  z-index:0;
+}
+.leaf,.falling-tree{
+  position:absolute;
+  top:-160px;
+  animation:fall linear infinite;
+}
+.leaf{font-size:30px;opacity:.8}
+.falling-tree{font-size:75px;opacity:.25}
+@keyframes fall{
+  0%{transform:translateY(-120px) rotate(0deg)}
+  50%{transform:translate(45px,55vh) rotate(170deg)}
+  100%{transform:translate(-30px,125vh) rotate(360deg)}
+}
+
+/* Click to enter */
+.intro{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  display:grid;
+  place-items:center;
+  padding:20px;
+  background:linear-gradient(135deg,#153d2b,#37794d);
+}
+.intro-button{
+  display:block;
+  width:min(400px,100%);
+  padding:15px;
+  background:white;
+  border:3px solid var(--gold);
+  border-radius:24px;
+  color:var(--deep);
+  box-shadow:0 25px 70px #0006;
+  font-weight:bold;
+}
+.intro-button img{
+  display:block;
+  width:100%;
+  max-height:60vh;
+  object-fit:contain;
+  border-radius:14px;
+}
+.intro-button span{
+  display:block;
+  padding:14px 5px 4px;
+}
+
+/* Main site */
+.site{position:relative;z-index:1}
+header{
+  background:linear-gradient(130deg,#19472ff2,#3d8054eb);
+  color:white;
+  padding:20px 22px 65px;
+}
+nav{
+  max-width:1150px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+.brand{font-weight:900;letter-spacing:1px}
+.nav-links{display:flex;gap:18px;flex-wrap:wrap}
+.nav-links a{color:white;text-decoration:none;font-weight:bold}
+.hero{
+  max-width:1150px;
+  margin:45px auto 0;
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  align-items:center;
+  gap:35px;
+}
+.eyebrow{
+  text-transform:uppercase;
+  letter-spacing:2px;
+  font-size:13px;
+  font-weight:bold;
+  color:#d5e7b7;
+}
+h1{
+  font-size:clamp(36px,6vw,66px);
+  line-height:1.08;
+  margin:12px 0 20px;
+}
+h1 span{color:#b8d878}
+.hero p{font-size:18px;max-width:580px}
+.buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.button{
+  display:inline-block;
+  padding:12px 20px;
+  border:0;
+  border-radius:10px;
+  background:var(--gold);
+  color:#17231d;
+  font-weight:bold;
+  text-decoration:none;
+  text-align:center;
+}
+.button.outline{background:transparent;border:1px solid #b8d878;color:white}
+.logo-card{
+  background:white;
+  padding:15px;
+  border-radius:22px;
+  text-align:center;
+  box-shadow:0 20px 50px #0004;
+  max-width:420px;
+  width:100%;
+  justify-self:end;
+}
+.logo-button{
+  width:100%;
+  border:0;
+  background:white;
+  color:var(--green);
+  font-weight:bold;
+}
+.logo-button img{
+  display:block;
+  width:100%;
+  max-height:380px;
+  object-fit:contain;
+}
+.logo-button span{display:block;margin-top:12px}
+#musicStatus{color:#526453;font-size:13px}
+main{max-width:1150px;margin:auto;padding:0 22px}
+.highlights{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+  position:relative;
+  margin-top:-28px;
+  margin-bottom:35px;
+}
+.highlight{
+  background:white;
+  border:1px solid #e3e5d8;
+  border-radius:14px;
+  padding:20px;
+  text-align:center;
+  box-shadow:0 10px 25px #173d2110;
+}
+.highlight strong{display:block;color:var(--green);font-size:19px}
+.highlight span{color:#59675e;font-size:14px}
+section{padding:35px 0}
+.heading{text-align:center;max-width:750px;margin:0 auto 25px}
+.heading .eyebrow{color:#557b35}
+.heading h2{
+  margin:8px 0;
+  font-size:clamp(28px,4vw,42px);
+  line-height:1.15;
+  color:var(--green);
+}
+.heading p{color:#59675e}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.card{
+  background:white;
+  border:1px solid #e3e5d8;
+  border-radius:18px;
+  padding:25px;
+}
+.card h3{color:var(--green);margin-top:0}
+.checklist{list-style:none;padding:0}
+.checklist li{margin:10px 0}
+.checklist li::before{content:"✓ ";color:var(--green);font-weight:bold}
+
+/* Photos */
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:14px;
+}
+.photo{
+  position:relative;
+  aspect-ratio:1;
+  overflow:hidden;
+  background:#e8efdf;
+  border:1px solid #b7c9a6;
+  border-radius:15px;
+}
+.photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+.photo-placeholder{
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-content:center;
+  text-align:center;
+  color:#496546;
+  padding:12px;
+}
+.photo-placeholder span{font-size:36px}
+
+/* Videos */
+.video-gallery{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:22px;
+}
+.video-card{
+  background:white;
+  border:1px solid #dce4d5;
+  border-radius:18px;
+  padding:15px;
+  min-width:0;
+}
+.video-card video{
+  display:block;
+  width:100%;
+  aspect-ratio:16/9;
+  background:#153d2b;
+  border-radius:12px;
+}
+.video-card h3{color:var(--green);margin:12px 0 3px}
+.video-empty{
+  display:none;
+  padding:45px 15px;
+  border-radius:12px;
+  text-align:center;
+  background:#e8efdf;
+  color:var(--green);
+}
+.video-card.missing video{display:none}
+.video-card.missing .video-empty{display:block}
+
+/* Contact */
+.contact-card{max-width:720px;margin:auto}
+form{display:grid;gap:13px}
+label{font-weight:bold;color:var(--green)}
+input,textarea{
+  display:block;
+  width:100%;
+  margin-top:5px;
+  border:1px solid #cbd3c5;
+  border-radius:10px;
+  background:white;
+  padding:12px;
+}
+textarea{min-height:110px;resize:vertical}
+input:focus,textarea:focus{
+  outline:3px solid #9ec76a66;
+  border-color:#699447;
+}
+.note{font-size:13px;color:#59675e}
+footer{
+  margin-top:30px;
+  padding:30px 20px 95px;
+  text-align:center;
+  background:var(--deep);
+  color:white;
+}
+footer a{color:#d5e7b7}
+
+/* Floating chat */
+.chat-widget{position:fixed;right:16px;bottom:16px;z-index:20}
+.chat-launcher{
+  border:0;
+  border-radius:50px;
+  padding:14px 20px;
+  background:var(--green);
+  color:white;
+  font-weight:bold;
+  box-shadow:0 8px 25px #0004;
+}
+.chat-panel{
+  position:absolute;
+  right:0;
+  bottom:65px;
+  width:min(350px,calc(100vw - 32px));
+  background:white;
+  border:1px solid #dce4d5;
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 15px 50px #0004;
+}
+.chat-head{
+  background:var(--green);
+  color:white;
+  padding:15px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.chat-head button{
+  background:none;
+  border:0;
+  color:white;
+  font-size:28px;
+}
+.chat-body{padding:18px}
+.chat-body p{margin-top:0;color:#526453}
+.music-frame{
+  position:fixed;
+  width:1px;
+  height:1px;
+  left:-10px;
+  top:-10px;
+  opacity:.001;
+  pointer-events:none;
+}
+@media(max-width:800px){
+  .hero{grid-template-columns:1fr;text-align:center}
+  .hero p{margin-left:auto;margin-right:auto}
+  .buttons{justify-content:center}
+  .logo-card{justify-self:center}
+  .highlights{grid-template-columns:1fr}
+  .about-grid{grid-template-columns:1fr}
+  .gallery{grid-template-columns:repeat(2,minmax(0,1fr))}
+  nav{flex-direction:column;text-align:center}
+  .nav-links{justify-content:center}
+}
+@media(max-width:600px){
+  .video-gallery{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .leaf,.falling-tree{animation:none;display:none}
+}
+</style>
 </head>
+
 <body>
-  <div class="scene" aria-hidden="true">
-    <span class="leaf"><svg viewBox="0 0 60 42"><path d="M5 24C15 5 39 1 56 8 51 27 33 41 12 37c8-7 19-15 34-24C30 19 17 28 8 35z"/><path d="M8 35C19 26 32 18 48 11"/></svg></span>
-    <span class="leaf"><svg viewBox="0 0 60 42"><path d="M5 24C15 5 39 1 56 8 51 27 33 41 12 37c8-7 19-15 34-24C30 19 17 28 8 35z"/><path d="M8 35C19 26 32 18 48 11"/></svg></span>
-    <span class="leaf"><svg viewBox="0 0 60 42"><path d="M5 24C15 5 39 1 56 8 51 27 33 41 12 37c8-7 19-15 34-24C30 19 17 28 8 35z"/><path d="M8 35C19 26 32 18 48 11"/></svg></span>
-    <span class="leaf"><svg viewBox="0 0 60 42"><path d="M5 24C15 5 39 1 56 8 51 27 33 41 12 37c8-7 19-15 34-24C30 19 17 28 8 35z"/><path d="M8 35C19 26 32 18 48 11"/></svg></span>
-    <span class="leaf"><svg viewBox="0 0 60 42"><path d="M5 24C15 5 39 1 56 8 51 27 33 41 12 37c8-7 19-15 34-24C30 19 17 28 8 35z"/><path d="M8 35C19 26 32 18 48 11"/></svg></span>
-    <span class="leaf"><svg viewBox="0 0 60 42"><path d="M5 24C15 5 39 1 56 8 51 27 33 41 12 37c8-7 19-15 34-24C30 19 17 28 8 35z"/><path d="M8 35C19 26 32 18 48 11"/></svg></span>
 
-    <div class="falling-tree one"><svg viewBox="0 0 100 190"><path d="M47 185h9v-77h13l-18-18-18 18h14v77zM51 8 27 55h15L19 84h23L11 112h79L59 84h22L58 55h15z"/></svg></div>
-    <div class="falling-tree two"><svg viewBox="0 0 100 190"><path d="M47 185h9v-77h13l-18-18-18 18h14v77zM51 8 27 55h15L19 84h23L11 112h79L59 84h22L58 55h15z"/></svg></div>
-    <div class="falling-tree three"><svg viewBox="0 0 100 190"><path d="M47 185h9v-77h13l-18-18-18 18h14v77zM51 8 27 55h15L19 84h23L11 112h79L59 84h22L58 55h15z"/></svg></div>
-  </div>
+<div class="scene" id="scene" aria-hidden="true"></div>
 
-  <div class="intro-screen" id="introScreen">
-    <div class="intro-card">
-      <button class="intro-entry" id="enterWithLogo" type="button" aria-label="Tap the Squirrelly Tree Care logo or message to enter the website and play music">
-        <img class="intro-logo" src="937.png" alt="Squirrelly Tree Care LLC squirrel and tree logo">
-        <span class="intro-prompt">Tap the logo to enter and play music</span>
-      </button>
+<div class="intro" id="intro">
+  <button class="intro-button" id="enterButton" type="button">
+    <img src="937.png" alt="Squirrelly Tree Care LLC logo">
+    <span>Tap the logo to enter and play music</span>
+  </button>
+</div>
+
+<div class="site" id="site" hidden>
+  <header>
+    <nav aria-label="Main navigation">
+      <div class="brand">SQUIRRELLY TREE CARE LLC</div>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#photos">Photos</a>
+        <a href="#videos">Videos</a>
+        <a href="#contact">Message</a>
+        <a href="tel:+17575598416">Call Derrick</a>
+      </div>
+    </nav>
+
+    <div class="hero">
+      <div>
+        <div class="eyebrow">Reliable tree care • Insured</div>
+        <h1>Care for your trees.<br><span>Respect for your property.</span></h1>
+        <p>
+          Meet Derrick Williams, Master Tree Care Contractor.
+          Bringing over a decade of contract experience to every job.
+        </p>
+        <div class="buttons">
+          <a class="button" href="tel:+17575598416">Call (757) 559-8416</a>
+          <a class="button outline" href="#contact">Send a message</a>
+        </div>
+      </div>
+
+      <div class="logo-card">
+        <button class="logo-button" id="musicButton" type="button">
+          <img src="937.png" alt="Squirrelly Tree Care LLC logo">
+          <span>Click the logo to play or pause music</span>
+        </button>
+        <p id="musicStatus" aria-live="polite">Music is off</p>
+      </div>
     </div>
-  </div>
+  </header>
 
-  <div class="site" id="websiteContent">
-    <header id="top">
-      <nav class="nav" aria-label="Main navigation">
-        <div class="brand">SQUIRRELLY TREE CARE LLC</div>
-        <div class="nav-links"><a href="#services">About</a><a href="#gallery">Photos</a><a href="#chat">Message</a><a class="call-pill" href="tel:+17575598416">Call Derrick</a></div>
-      </nav>
-      <div class="hero">
-        <div>
-          <div class="eyebrow">Reliable tree care • Insured</div>
-          <h1>Care for your trees.<br><span>Respect for your property.</span></h1>
-          <p>Meet Derrick Williams, Master Tree Care Contractor. Bringing over a decade of contract experience to every job.</p>
-          <div class="hero-cta"><a class="button gold" href="tel:+17575598416">Call +1 (757) 559-8416</a><a class="button outline" href="#chat">Send a message</a></div>
-        </div>
-        <div class="logo-card">
-          <button class="logo-button" id="musicLogo" type="button" aria-label="Click to start or pause the music">
-            <img src="937.png" alt="Squirrelly Tree Care LLC squirrel and tree logo">
-            <span class="logo-hint">Click the logo to play music</span>
-          </button>
-          <span class="sound-status" id="soundStatus"><span class="sound-dot"></span><span id="soundText">Music is off</span></span>
-        </div>
+  <main>
+    <div class="highlights">
+      <div class="highlight">
+        <strong>10+ Years</strong>
+        <span>Contract tree care experience</span>
       </div>
-    </header>
-
-    <main>
-      <div class="trust-row" aria-label="Business highlights">
-        <div class="trust-item"><strong>10+ Years</strong><span>Contract tree care experience</span></div>
-        <div class="trust-item"><strong>Reliable &amp; Insured</strong><span>Professional service you can count on</span></div>
-        <div class="trust-item"><strong>Talk with Derrick</strong><span><a class="contact-inline" href="tel:+17575598416">(757) 559-8416</a></span></div>
+      <div class="highlight">
+        <strong>Reliable &amp; Insured</strong>
+        <span>Professional service you can count on</span>
       </div>
-
-      <section id="services">
-        <div class="section-heading"><div class="eyebrow">Local tree care</div><h2>Experience you can feel good about</h2><p>Derrick Williams leads Squirrelly Tree Care LLC with more than a decade of contract work experience.</p></div>
-        <div class="about-grid">
-          <article class="about-card"><h3>Meet Derrick</h3><p>Reliable, insured tree care backed by over a decade of hands-on contract experience. Call or send a message to talk about your tree care needs.</p><ul class="checklist"><li>Over a decade of contract experience</li><li>Reliable and insured</li><li>Direct contact with Derrick</li></ul><a class="contact-inline" href="tel:+17575598416">Call Derrick: +1 (757) 559-8416</a></article>
-          <article class="about-card"><h3>Get in touch</h3><p>Call now or use the message box below. On a phone, the message form opens your text-message app with Derrick’s number.</p><a class="button gold" href="sms:+17575598416">Text Derrick</a></article>
-        </div>
-      </section>
-
-      <section id="gallery">
-        <div class="section-heading"><div class="eyebrow">Recent work</div><h2>Tree care photo gallery</h2><p>Ten spots are ready for your tree and job photos. Add your files beside this HTML file and update the image names in the code.</p></div>
-        <div class="gallery">
-          <div class="photo-slot"><img src="tree1.jpg" alt="Tree care project 1" onload="this.nextElementSibling.hidden=true" onerror="this.hidden=true"><div class="photo-placeholder"><span class="tree-icon">🌳</span><strong>Tree photo 1</strong><small>Add tree1.jpg</small></div></div>
-          <div class="photo-slot"><img src="tree2.jpg" alt="Tree care project 2" onload="this.nextElementSibling.hidden=true" onerror="this.hidden=true"><div class="photo-placeholder"><span class="tree-icon">🌲</span><strong>Tree photo 2</strong><small>Add tree2.jpg</small></div></div>
-          <div class="photo-slot"><img src="tree3.jpg" alt="Tree care project 3" onload="this.nextElementSibling.hidden=true" onerror="this.hidden=true"><div class="photo-placeholder"><span class="tree-icon">🌳</span><strong>Tree photo 3</strong><small>Add tree3.jpg</small></div></div>
-          <div class="photo-slot"><img src="tree4.jpg" alt="Tree care project 4" onload="this.nextElementSibling.hidden=true" onerror="this.hidden=true"><div class="photo-placeholder"><span class="tree-icon">🌲</span><strong>Tree photo 4</strong><small>Add tree4.jpg</small></div></div>
-          <div class="photo-slot"><img src="tree5.jpg" alt="Tree care project 5" onload="this.nextElementSibling.hidden=true" onerror="this.hidden=true"><div class="photo-placeholder"><span class="tree-icon">🌳</span><strong>Tree photo 5</strong><small>Add tree5.jpg</small></div></div>
-          <div class="photo-slot"><img src="tree6.jpg" alt="Tree care project 6" onload="this.nextElementSibling.hidden=true" onerror="this.hidden=true"><div class="photo-placeholder"><span class="tree-icon">🌲</span><strong>Tree photo 6</strong><small>Add tree6.jpg</small></div></div>
-          <div class="photo-slot"><img src="tree7.jpg" alt="Tree care project 7" onload="this.nextElementSibling.hidden=true" onerror="this.hidden=true"><div class="photo-placeholder"><span class="tree-icon">🌳</span><strong>Tree photo 7</strong><small>Add tree7.jpg</small></div></div>
-          <div class="photo-slot"><img src="tree8.jpg" alt="Tree care project 8" onload="this.nextElementSibling.hidden=true" onerror="this.hidden=true"><div class="photo-placeholder"><span class="tree-icon">🌲</span><strong>Tree photo 8</strong><small>Add tree8.jpg</small></div></div>
-          <div class="photo-slot"><img src="tree9.jpg" alt="Tree care project 9" onload="this.nextElementSibling.hidden=true" onerror="this.hidden=true"><div class="photo-placeholder"><span class="tree-icon">🌳</span><strong>Tree photo 9</strong><small>Add tree9.jpg</small></div></div>
-          <div class="photo-slot"><img src="tree10.jpg" alt="Tree care project 10" onload="this.nextElementSibling.hidden=true" onerror="this.hidden=true"><div class="photo-placeholder"><span class="tree-icon">🌲</span><strong>Tree photo 10</strong><small>Add tree10.jpg</small></div></div>
-        </div>
-      </section>
-
-      <section id="chat">
-        <div class="section-heading"><div class="eyebrow">Contact Derrick</div><h2>Send a quick message</h2><p>Tell Derrick what you need help with, and he can follow up.</p></div>
-        <div class="chat-card">
-          <h3>Message Derrick Williams</h3>
-          <p>This chat box opens your device’s text-message app so your message can go directly to Derrick.</p>
-          <form class="chat-form" id="messageForm">
-            <div><label for="customerName">Your name</label><input id="customerName" name="name" autocomplete="name" placeholder="Enter your name" required></div>
-            <div><label for="customerMessage">How can we help?</label><textarea id="customerMessage" name="message" placeholder="Tell us about the tree or service you need" required></textarea></div>
-            <button class="button gold" type="submit">Continue to text Derrick</button>
-            <p class="chat-note">Your phone may ask you to confirm before the text message opens. Standard messaging rates may apply.</p>
-          </form>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      <strong>Squirrelly Tree Care LLC</strong><br>
-      Derrick Williams • Master Tree Care Contractor<br>
-      <a class="footer-phone" href="tel:+17575598416">+1 (757) 559-8416</a><br>
-      <small>Reliable • Insured • Over a decade of contract experience</small>
-    </footer>
-
-    <div class="chat-widget">
-      <div class="chat-panel" id="quickChatPanel" hidden>
-        <div class="chat-panel-head">
-          <div><strong>Squirrelly Tree Care</strong><small>Text Derrick Williams</small></div>
-          <button class="chat-close" id="closeChat" type="button" aria-label="Close chat">×</button>
-        </div>
-        <div class="chat-panel-body">
-          <p class="chat-greeting">Hi! Tell Derrick what tree care you need.</p>
-          <form class="quick-chat-form" id="quickChatForm">
-            <div><label for="quickName">Your name</label><input id="quickName" autocomplete="name" placeholder="Your name" required></div>
-            <div><label for="quickMessage">Your message</label><textarea id="quickMessage" placeholder="How can we help?" required></textarea></div>
-            <button class="button gold" type="submit">Text Derrick</button>
-            <p class="quick-chat-note">This opens your phone’s text-message app.</p>
-          </form>
-        </div>
+      <div class="highlight">
+        <strong>Talk with Derrick</strong>
+        <a href="tel:+17575598416">(757) 559-8416</a>
       </div>
-      <button class="chat-launcher" id="chatLauncher" type="button" aria-expanded="false">💬 Chat with Derrick</button>
     </div>
+
+    <section id="about">
+      <div class="heading">
+        <div class="eyebrow">Local tree care</div>
+        <h2>Experience you can feel good about</h2>
+        <p>
+          Derrick Williams leads Squirrelly Tree Care LLC with more
+          than a decade of contract work experience.
+        </p>
+      </div>
+
+      <div class="about-grid">
+        <article class="card">
+          <h3>Meet Derrick</h3>
+          <p>
+            Reliable, insured tree care backed by over a decade of
+            hands-on contract experience. Call or send a message
+            to discuss your tree care needs.
+          </p>
+          <ul class="checklist">
+            <li>Over a decade of contract experience</li>
+            <li>Reliable and insured</li>
+            <li>Direct contact with Derrick</li>
+          </ul>
+          <a href="tel:+17575598416">Call Derrick: (757) 559-8416</a>
+        </article>
+
+        <article class="card">
+          <h3>Get in touch</h3>
+          <p>
+            Have a tree care project in mind? Contact Derrick to
+            talk about the job and your property.
+          </p>
+          <p>
+            The message forms open your device’s text-message app
+            with Derrick’s number.
+          </p>
+          <a class="button" href="sms:+17575598416">Text Derrick</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="photos">
+      <div class="heading">
+        <div class="eyebrow">Recent work</div>
+        <h2>Tree care photo gallery</h2>
+        <p>A look at our tree care projects.</p>
+      </div>
+      <div class="gallery" id="photoGallery"></div>
+    </section>
+
+    <section id="videos">
+      <div class="heading">
+        <div class="eyebrow">See us at work</div>
+        <h2>Tree care videos</h2>
+        <p>Watch Squirrelly Tree Care in action.</p>
+      </div>
+
+      <!--
+        Upload these files beside index.html in GitHub:
+        video1.mp4
+        video2.mp4
+        video3.mp4
+        video4.mp4
+
+        Use MP4 videos encoded with H.264 video and AAC audio
+        for broad browser compatibility.
+      -->
+
+      <div class="video-gallery">
+        <article class="video-card">
+          <video
+            controls
+            playsinline
+            preload="metadata"
+            src="video1.mp4"
+            aria-label="Tree care video 1">
+          </video>
+          <div class="video-empty">Video coming soon</div>
+          <h3>Tree care video 1</h3>
+        </article>
+
+        <article class="video-card">
+          <video
+            controls
+            playsinline
+            preload="metadata"
+            src="video2.mp4"
+            aria-label="Tree care video 2">
+          </video>
+          <div class="video-empty">Video coming soon</div>
+          <h3>Tree care video 2</h3>
+        </article>
+
+        <article class="video-card">
+          <video
+            controls
+            playsinline
+            preload="metadata"
+            src="video3.mp4"
+            aria-label="Tree care video 3">
+          </video>
+          <div class="video-empty">Video coming soon</div>
+          <h3>Tree care video 3</h3>
+        </article>
+
+        <article class="video-card">
+          <video
+            controls
+            playsinline
+            preload="metadata"
+            src="video4.mp4"
+            aria-label="Tree care video 4">
+          </video>
+          <div class="video-empty">Video coming soon</div>
+          <h3>Tree care video 4</h3>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="heading">
+        <div class="eyebrow">Contact Derrick</div>
+        <h2>Send a quick message</h2>
+        <p>Tell Derrick what you need help with.</p>
+      </div>
+
+      <div class="card contact-card">
+        <h3>Message Derrick Williams</h3>
+        <p>This form opens your device’s text-message app.</p>
+
+        <form id="contactForm">
+          <label for="customerName">
+            Your name
+            <input
+              id="customerName"
+              autocomplete="name"
+              placeholder="Enter your name"
+              required>
+          </label>
+
+          <label for="customerMessage">
+            How can we help?
+            <textarea
+              id="customerMessage"
+              placeholder="Tell us about your tree care needs"
+              required></textarea>
+          </label>
+
+          <button class="button" type="submit">Continue to text Derrick</button>
+          <p class="note">Review and send your message in your text-message app.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <strong>Squirrelly Tree Care LLC</strong><br>
+    Derrick Williams • Master Tree Care Contractor<br>
+    <a href="tel:+17575598416">(757) 559-8416</a><br>
+    <small>Reliable • Insured • Over a decade of contract experience</small>
+  </footer>
+
+  <div class="chat-widget">
+    <div class="chat-panel" id="chatPanel" hidden>
+      <div class="chat-head">
+        <strong>Text Derrick Williams</strong>
+        <button id="closeChat" type="button" aria-label="Close chat">×</button>
+      </div>
+
+      <div class="chat-body">
+        <p>Hi! Tell Derrick what tree care you need.</p>
+
+        <form id="quickChatForm">
+          <label for="quickName">
+            Your name
+            <input
+              id="quickName"
+              autocomplete="name"
+              placeholder="Your name"
+              required>
+          </label>
+
+          <label for="quickMessage">
+            Your message
+            <textarea
+              id="quickMessage"
+              placeholder="How can we help?"
+              required></textarea>
+          </label>
+
+          <button class="button" type="submit">Text Derrick</button>
+          <small class="note">Opens your text-message app.</small>
+        </form>
+      </div>
+    </div>
+
+    <button
+      class="chat-launcher"
+      id="chatLauncher"
+      type="button"
+      aria-controls="chatPanel"
+      aria-expanded="false">
+      💬 Chat with Derrick
+    </button>
   </div>
+</div>
 
-  <script>
-    const youtubeId = 'g4dScvHrXC8';
-    let musicFrame = null;
-    let isPlaying = false;
-    const logoButton = document.getElementById('musicLogo');
-    const soundStatus = document.getElementById('soundStatus');
-    const soundText = document.getElementById('soundText');
-    const introScreen = document.getElementById('introScreen');
-    const websiteContent = document.getElementById('websiteContent');
+<script>
+"use strict";
 
-    function toggleMusic(){
-      if(!musicFrame){
-        musicFrame = document.createElement('iframe');
-        musicFrame.className = 'music-frame';
-        musicFrame.title = 'Squirrelly Tree Care background music';
-        musicFrame.allow = 'autoplay; encrypted-media; picture-in-picture';
-        musicFrame.referrerPolicy = 'strict-origin-when-cross-origin';
-        musicFrame.src = `https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1&loop=1&playlist=${youtubeId}&controls=0&playsinline=1&enablejsapi=1&origin=${encodeURIComponent(location.origin)}`;
-        document.body.appendChild(musicFrame);
-        isPlaying = true;
-      }else{
-        musicFrame.contentWindow.postMessage(JSON.stringify({event:'command',func:isPlaying?'pauseVideo':'playVideo',args:[]}), '*');
-        isPlaying = !isPlaying;
-      }
-      soundStatus.classList.toggle('playing',isPlaying);
-      soundText.textContent = isPlaying ? 'Music is playing — click to pause' : 'Music is paused — click to play';
-      logoButton.setAttribute('aria-label',isPlaying?'Click to pause the music':'Click to play the music');
+/* Falling leaves and trees */
+const scene = document.getElementById("scene");
+
+for (let i = 0; i < 14; i++) {
+  const leaf = document.createElement("span");
+  leaf.className = "leaf";
+  leaf.textContent = ["🍃", "🍂", "🍁"][i % 3];
+  leaf.style.left = (i * 7.4) + "%";
+  leaf.style.animationDuration = (12 + (i % 7)) + "s";
+  leaf.style.animationDelay = (-i * 2.3) + "s";
+  scene.appendChild(leaf);
+}
+
+for (let i = 0; i < 3; i++) {
+  const tree = document.createElement("span");
+  tree.className = "falling-tree";
+  tree.textContent = "🌲";
+  tree.style.left = (5 + i * 40) + "%";
+  tree.style.animationDuration = (24 + i * 4) + "s";
+  tree.style.animationDelay = (-i * 9) + "s";
+  scene.appendChild(tree);
+}
+
+/* Photo gallery */
+const photoGallery = document.getElementById("photoGallery");
+
+for (let i = 1; i <= 10; i++) {
+  const slot = document.createElement("div");
+  slot.className = "photo";
+
+  const placeholder = document.createElement("div");
+  placeholder.className = "photo-placeholder";
+
+  const icon = document.createElement("span");
+  icon.textContent = "🌳";
+
+  const caption = document.createElement("strong");
+  caption.textContent = "Tree photo " + i;
+
+  placeholder.append(icon, caption);
+
+  const image = document.createElement("img");
+  image.alt = "Tree care project " + i;
+  image.loading = "lazy";
+  image.hidden = true;
+
+  image.addEventListener("load", function () {
+    image.hidden = false;
+    placeholder.hidden = true;
+  });
+
+  image.addEventListener("error", function () {
+    image.hidden = true;
+    placeholder.hidden = false;
+  });
+
+  slot.append(placeholder, image);
+  photoGallery.appendChild(slot);
+  image.src = "tree" + i + ".jpg";
+}
+
+/* Music */
+const youtubeId = "g4dScvHrXC8";
+const musicButton = document.getElementById("musicButton");
+const musicStatus = document.getElementById("musicStatus");
+
+let musicFrame = null;
+let musicRequested = false;
+
+function updateMusicStatus() {
+  musicStatus.textContent = musicRequested
+    ? "Music requested — tap logo to pause"
+    : "Music is paused — tap logo to play";
+
+  musicButton.setAttribute(
+    "aria-label",
+    musicRequested ? "Pause background music" : "Play background music"
+  );
+}
+
+function sendMusicCommand(command) {
+  if (!musicFrame || !musicFrame.contentWindow) return;
+
+  musicFrame.contentWindow.postMessage(
+    JSON.stringify({
+      event: "command",
+      func: command,
+      args: []
+    }),
+    "https://www.youtube-nocookie.com"
+  );
+}
+
+function startMusic() {
+  if (!musicFrame) {
+    musicFrame = document.createElement("iframe");
+    musicFrame.className = "music-frame";
+    musicFrame.title = "Squirrelly Tree Care background music";
+    musicFrame.allow = "autoplay; encrypted-media";
+    musicFrame.referrerPolicy = "strict-origin-when-cross-origin";
+
+    const params = new URLSearchParams({
+      autoplay: "1",
+      loop: "1",
+      playlist: youtubeId,
+      controls: "0",
+      playsinline: "1",
+      enablejsapi: "1"
+    });
+
+    if (location.protocol === "https:" || location.protocol === "http:") {
+      params.set("origin", location.origin);
     }
-    logoButton.addEventListener('click',toggleMusic);
 
-    document.getElementById('enterWithLogo').addEventListener('click',function(){
-      websiteContent.classList.add('show');
-      toggleMusic();
-      introScreen.classList.add('leaving');
-      window.setTimeout(function(){introScreen.remove();},600);
-      window.scrollTo(0,0);
-    });
+    musicFrame.src =
+      "https://www.youtube-nocookie.com/embed/" +
+      youtubeId + "?" + params.toString();
 
-    function openTextMessage(name,message){
-      const body = `Hello Derrick, my name is ${name}. ${message}`;
-      window.location.href = `sms:+17575598416?body=${encodeURIComponent(body)}`;
-    }
-
-    document.getElementById('messageForm').addEventListener('submit',function(event){
-      event.preventDefault();
-      const name = document.getElementById('customerName').value.trim();
-      const message = document.getElementById('customerMessage').value.trim();
-      if(name && message) openTextMessage(name,message);
+    musicFrame.addEventListener("load", function () {
+      if (!musicRequested) sendMusicCommand("pauseVideo");
     });
 
-    const chatPanel = document.getElementById('quickChatPanel');
-    const chatLauncher = document.getElementById('chatLauncher');
-    chatLauncher.addEventListener('click',function(){
-      chatPanel.hidden = !chatPanel.hidden;
-      chatLauncher.setAttribute('aria-expanded',String(!chatPanel.hidden));
+    document.body.appendChild(musicFrame);
+  } else {
+    sendMusicCommand("playVideo");
+  }
+
+  musicRequested = true;
+  updateMusicStatus();
+}
+
+function pauseMusic() {
+  musicRequested = false;
+  sendMusicCommand("pauseVideo");
+  updateMusicStatus();
+}
+
+musicButton.addEventListener("click", function () {
+  if (musicRequested) {
+    pauseMusic();
+  } else {
+    document.querySelectorAll(".video-card video").forEach(function (video) {
+      video.pause();
     });
-    document.getElementById('closeChat').addEventListener('click',function(){
-      chatPanel.hidden = true;
-      chatLauncher.setAttribute('aria-expanded','false');
+    startMusic();
+  }
+});
+
+/* Enter website */
+document.getElementById("enterButton").addEventListener("click", function () {
+  document.getElementById("site").hidden = false;
+  document.getElementById("intro").hidden = true;
+  startMusic();
+  window.scrollTo(0, 0);
+});
+
+/* Video playback */
+document.querySelectorAll(".video-card video").forEach(function (video) {
+  function showVideoUnavailable() {
+    video.closest(".video-card").classList.add("missing");
+  }
+
+  video.addEventListener("error", showVideoUnavailable);
+
+  video.addEventListener("loadedmetadata", function () {
+    video.closest(".video-card").classList.remove("missing");
+  });
+
+  video.addEventListener("play", function () {
+    document.querySelectorAll(".video-card video").forEach(function (other) {
+      if (other !== video) other.pause();
     });
-    document.getElementById('quickChatForm').addEventListener('submit',function(event){
-      event.preventDefault();
-      const name = document.getElementById('quickName').value.trim();
-      const message = document.getElementById('quickMessage').value.trim();
-      if(name && message) openTextMessage(name,message);
-    });
-  </script>
+
+    if (musicRequested) pauseMusic();
+  });
+
+  if (video.error) showVideoUnavailable();
+});
+
+/* Text-message forms */
+function openTextMessage(name, message) {
+  const text = "Hello Derrick, my name is " + name + ". " + message;
+  const isAppleMobile = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+  const separator = isAppleMobile ? "&" : "?";
+
+  window.location.href =
+    "sms:+17575598416" + separator + "body=" + encodeURIComponent(text);
+}
+
+document.getElementById("contactForm").addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  const name = document.getElementById("customerName").value.trim();
+  const message = document.getElementById("customerMessage").value.trim();
+
+  if (name && message) openTextMessage(name, message);
+});
+
+document.getElementById("quickChatForm").addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  const name = document.getElementById("quickName").value.trim();
+  const message = document.getElementById("quickMessage").value.trim();
+
+  if (name && message) openTextMessage(name, message);
+});
+
+/* Floating chat */
+const chatPanel = document.getElementById("chatPanel");
+const chatLauncher = document.getElementById("chatLauncher");
+
+function setChatOpen(open) {
+  chatPanel.hidden = !open;
+  chatLauncher.setAttribute("aria-expanded", String(open));
+
+  if (open) {
+    document.getElementById("quickName").focus();
+  } else {
+    chatLauncher.focus();
+  }
+}
+
+chatLauncher.addEventListener("click", function () {
+  setChatOpen(chatPanel.hidden);
+});
+
+document.getElementById("closeChat").addEventListener("click", function () {
+  setChatOpen(false);
+});
+
+document.addEventListener("keydown", function (event) {
+  if (event.key === "Escape" && !chatPanel.hidden) {
+    setChatOpen(false);
+  }
+});
+</script>
+
 </body>
 </html>
